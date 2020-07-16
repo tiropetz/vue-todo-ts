@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container">
+    <div>
+      <TaskRow title="へいへい！" />
+      <TaskRow title="xxをやる" />
+      <TaskRow title="これがタスク" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import TaskRow from "@/components/TaskRow.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    TaskRow
   }
 };
 </script>
+
+<style scoped lang="scss">
+.container {
+  min-height: 100vh;
+  background-color: #fafafa;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+</style>
