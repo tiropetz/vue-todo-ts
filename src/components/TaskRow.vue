@@ -11,7 +11,7 @@ import Vue from "vue";
 export default Vue.extend({
   name: "TaskRow",
   props: {
-    id: { type: Number },
+    id: { type: String },
     title: { type: String, default: "No Title" },
     deleteTask: { type: Function }
   }

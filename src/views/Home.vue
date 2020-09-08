@@ -1,18 +1,25 @@
 <template>
-  <div class="container">
-    <div class="wrapper">
-      <h1>TODO LIST</h1>
-      <TaskRow
-        v-for="task in todoList"
-        :key="task.id"
-        :id="task.id"
-        :title="task.title"
-        :deleteTask="deleteTask"
-      />
-    </div>
-    <div class="wrapper">
-      <h1>DONE TASKS</h1>
-      <div v-for="task in doneList" :key="task.id">{{ task.title }}</div>
+  <div>
+    <div class="container">
+      <div class="wrapper">
+        <h1>NEW TASK</h1>
+        <input v-model="taskTitle" placeholder="入力して" />
+        <button @click="addTask">追加</button>
+      </div>
+      <div class="wrapper">
+        <h1>TODO LIST</h1>
+        <TaskRow
+          v-for="task in todoList"
+          :key="task.id"
+          :id="task.id"
+          :title="task.title"
+          :deleteTask="deleteTask"
+        />
+      </div>
+      <div class="wrapper">
+        <h1>DONE TASKS</h1>
+        <div v-for="task in doneList" :key="task.id">{{ task.title }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +27,7 @@
 <script>
 import TaskRow from "@/components/TaskRow.vue";
 import Vue from "vue";
+import { v4 as uuid } from "uuid";
 
 export default Vue.extend({
   name: "Home",
@@ -28,12 +36,9 @@ export default Vue.extend({
   },
   data() {
     return {
-      todoList: [
-        { id: 1, title: "aaaa" },
-        { id: 2, title: "bbb" },
-        { id: 3, title: "cc" }
-      ],
-      doneList: []
+      todoList: [],
+      doneList: [],
+      taskTitle: ""
     };
   },
   methods: {
@@ -43,6 +48,12 @@ export default Vue.extend({
         this.todoList.find(task => task.id === id)
       ];
       this.todoList = this.todoList.filter(task => task.id !== id);
+    },
+    addTask: function() {
+      const newTask = { id: uuid(), title: this.taskTitle };
+      console.log({ newTask });
+      this.todoList = [...this.todoList, newTask];
+      this.taskTitle = "";
     }
   }
 });
@@ -57,6 +68,6 @@ export default Vue.extend({
   justify-content: center;
 }
 .wrapper {
-  margin: 0 20px;
+  margin: 0 5%;
 }
 </style>
