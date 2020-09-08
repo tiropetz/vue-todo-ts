@@ -1,13 +1,18 @@
 <template>
   <div class="container">
-    <div>
+    <div class="wrapper">
+      <h1>TODO LIST</h1>
       <TaskRow
-        v-for="todo in todoList"
-        :key="todo.id"
-        :id="todo.id"
-        :title="todo.title"
+        v-for="task in todoList"
+        :key="task.id"
+        :id="task.id"
+        :title="task.title"
         :deleteTask="deleteTask"
       />
+    </div>
+    <div class="wrapper">
+      <h1>DONE TASKS</h1>
+      <div v-for="task in doneList" :key="task.id">{{ task.title }}</div>
     </div>
   </div>
 </template>
@@ -27,12 +32,17 @@ export default Vue.extend({
         { id: 1, title: "aaaa" },
         { id: 2, title: "bbb" },
         { id: 3, title: "cc" }
-      ]
+      ],
+      doneList: []
     };
   },
   methods: {
     deleteTask: function(id) {
-      this.todoList = this.todoList.filter(todo => todo.id !== id);
+      this.doneList = [
+        ...this.doneList,
+        this.todoList.find(task => task.id === id)
+      ];
+      this.todoList = this.todoList.filter(task => task.id !== id);
     }
   }
 });
@@ -45,5 +55,8 @@ export default Vue.extend({
   padding: 15px;
   display: flex;
   justify-content: center;
+}
+.wrapper {
+  margin: 0 20px;
 }
 </style>
