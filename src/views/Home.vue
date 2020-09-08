@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <TaskRow title="へいへい！" />
+      <TaskRow title="へいへい！" isChecked />
       <TaskRow title="xxをやる" />
       <TaskRow title="これがタスク" />
     </div>
