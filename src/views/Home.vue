@@ -4,8 +4,9 @@
       <TaskRow
         v-for="todo in todoList"
         :key="todo.id"
+        :id="todo.id"
         :title="todo.title"
-        :is-checked="todo.isChecked"
+        :deleteTask="deleteTask"
       />
     </div>
   </div>
@@ -23,11 +24,16 @@ export default Vue.extend({
   data() {
     return {
       todoList: [
-        { id: 1, title: "aaaa", isChecked: true },
-        { id: 2, title: "bbb", isChecked: true },
-        { id: 3, title: "cc", isChecked: false }
+        { id: 1, title: "aaaa" },
+        { id: 2, title: "bbb" },
+        { id: 3, title: "cc" }
       ]
     };
+  },
+  methods: {
+    deleteTask: function(id) {
+      this.todoList = this.todoList.filter(todo => todo.id !== id);
+    }
   }
 });
 </script>

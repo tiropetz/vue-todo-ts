@@ -1,7 +1,7 @@
 <template>
   <li class="task-row">
-    <input type="checkbox" v-model="isChecked" class="checkbox" />
     {{ title }}
+    <button @click="deleteTask(id)">完了</button>
   </li>
 </template>
 
@@ -11,8 +11,9 @@ import Vue from "vue";
 export default Vue.extend({
   name: "TaskRow",
   props: {
+    id: { type: Number },
     title: { type: String, default: "No Title" },
-    isChecked: { type: Boolean, default: false }
+    deleteTask: { type: Function }
   }
 });
 </script>
@@ -26,13 +27,11 @@ export default Vue.extend({
   height: 50px;
   border-radius: 25px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   background-color: #fff;
   margin: 10px 0;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-.checkbox {
-  margin-right: 16px;
 }
 </style>
